@@ -1,0 +1,46 @@
+{
+  "name": "pager-api",
+  "version": "1.0.0",
+  "description": "Pager Api",
+  "main": "server.js",
+  "scripts": {
+    "check-prettier": "prettier --list-different --single-quote --print-width 120 '*.js' 'src/**/*.js' 'test/**/*.js'",
+    "start": "NODE_ENV=development nodemon --watch 'src/**/*' --exec 'node src/app.js'",
+    "test": "NODE_ENV=test mocha",
+    "prettier": "prettier --write --single-quote --print-width 120 '*.js' 'src/**/*.js' 'test/**/*.js'",
+    "lint": "eslint '*.js' 'src/**/*.js' 'test/**/*.js'",
+    "migrate:dev": "NODE_ENV=development sequelize db:migrate",
+    "migrate:prod": "NODE_ENV=production sequelize db:migrate",
+    "migrate:undo": "NODE_ENV=development sequelize db:migrate:undo:all",
+    "sequelize": "sequelize",
+    "seed:dev": "NODE_ENV=development sequelize db:seed:all",
+    "seed:undo": "NODE_ENV=development sequelize db:seed:undo:all"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com:duvanmonsa/pager_api"
+  },
+  "author": "duvanmonsa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/duvanmonsa/pager_api"
+  },
+  "homepage": "https://github.com/duvanmonsa/pager_api",
+  "dependencies": {
+    "@hapi/boom": "^7.4.2",
+    "@hapi/joi": "^15.0.0",
+    "@hapi/wreck": "^15.0.0",
+    "hapi": "^18.1.0",
+    "dotenv": "^6.2.0",
+    "pg": "^7.8.1",
+    "pg-hstore": "^2.3.2",
+    "prettier": "^1.16.4",
+    "sequelize": ">=5.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.14.1",
+    "mocha": "^6.1.4",
+    "nodemon": "^1.18.10",
+    "sequelize-cli": "^5.4.0"
+  }
+}
