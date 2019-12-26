@@ -29,6 +29,26 @@ const resources = {
     );
 
     /**
+     * GET /resource/{id}
+     */
+    server.route(
+      {
+        method: 'GET',
+        path: '/resource/{id}',
+        config: {
+          description: 'Get resource by id',
+          notes: 'Returns resource object',
+          validate: {
+            params: {
+              id: Joi.string().required()
+            }
+          }
+        },
+        handler: handlers.getResource
+      }
+    );
+
+    /**
      * POST /resource
      */
     server.route(
@@ -37,7 +57,7 @@ const resources = {
         path: '/resource',
         config: {
           description: 'Create a new resource',
-          notes: 'Returns the new resource',
+          notes: 'Returns resource object',
           validate: {
             payload: {
               name: Joi.string().required(),
@@ -51,8 +71,6 @@ const resources = {
       }
     );
 
-
-
     /**
      * PUT /resource/{id}
      */
@@ -62,7 +80,7 @@ const resources = {
         path: '/resource/{id}',
         config: {
           description: 'Update resource by id',
-          notes: 'Returns the resource updated',
+          notes: 'Returns resource object',
           validate: {
             params: {
               id: Joi.string().required()
@@ -79,7 +97,6 @@ const resources = {
       }
     );
 
-
     /**
      * DELETE /resource/{id}
      */
@@ -89,7 +106,7 @@ const resources = {
         path: '/resource/{id}',
         config: {
           description: 'Delete resource by id',
-          notes: 'Returns the resource updated',
+          notes: 'Returns delete status',
           validate: {
             params: {
               id: Joi.string().required()

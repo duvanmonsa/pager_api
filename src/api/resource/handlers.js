@@ -7,6 +7,7 @@ const Op = Sequelize.Op;
 
 const getResource = async (req, h) => {
   try {
+    const resourceId = req.params.id;
     const resource = await models.Resource.findByPk(resourceId);
     if (!resource) {
       return h.response({ error: 'Resource no found' }).code(500);
