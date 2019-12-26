@@ -51,10 +51,6 @@ const createResource = async (req, h) => {
     const resource = req.payload;
     resource.code = shortid.generate();
 
-    if (!resource) {
-      throw new Error('You need to provide resource data');
-    }
-
     const newResource = await models.Resource.create(resource);
     if (!newResource) {
       throw new Error('Resource no created');
@@ -65,4 +61,21 @@ const createResource = async (req, h) => {
   }
 };
 
-module.exports = { getResources, getResource, createResource };
+const updateResource = async (req, h) => {
+  try {
+    const resourceId = req.params.id;
+    if (!resourceId) {
+      throw new Error('You need to provide an id');
+    }
+    const resource = req.payload;
+    const updatedResource = await models.Resource.update(resource, { where: { id: resourceId }, returning: true }).then(result => result[1]);
+    if (!updatedResource) {
+      throw new Error('Resource was no updated');
+    }
+    return h.response(updatedResource);
+  } catch (err) {
+    h.response({ error: err.message }).code(201);
+  }
+};
+
+module.exports = { getResources, getResource, createResource, updateResource };

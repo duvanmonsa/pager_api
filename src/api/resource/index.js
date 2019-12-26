@@ -51,6 +51,34 @@ const resources = {
       }
     );
 
+
+
+    /**
+     * PUT /resource
+     */
+    server.route(
+      {
+        method: 'PUT',
+        path: '/resource/{id}',
+        config: {
+          description: 'Update a resource by id',
+          notes: 'Returns the resource updated',
+          validate: {
+            params: {
+              id: Joi.string().required()
+            },
+            payload: {
+              name: Joi.string().required(),
+              description: Joi.string().required(),
+              url: Joi.string().uri().required(),
+              type: Joi.string().valid(RESOURCE_TYPES).required(),
+            }
+          }
+        },
+        handler: handlers.updateResource
+      }
+    );
+
     // server.route({
     //   method: ['GET', 'PUT', 'POST'],
     //   path: '/api/movie/{title?}',
