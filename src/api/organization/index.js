@@ -65,7 +65,7 @@ const organizationRoutes = {
           tags: ['api'],
           validate: {
             params: Joi.object({
-              id: Joi.string().required()
+              id: Joi.number().required()
             }),
             payload: Joi.object({
               name: Joi.string(),
@@ -92,7 +92,7 @@ const organizationRoutes = {
           tags: ['api'],
           validate: {
             params: Joi.object({
-              id: Joi.string().required()
+              id: Joi.number().required()
             })
           }
         },

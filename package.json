@@ -6,7 +6,8 @@
   "scripts": {
     "check-prettier": "prettier --list-different --single-quote --print-width 120 '*.js' 'src/**/*.js' 'test/**/*.js'",
     "start": "NODE_ENV=development nodemon --watch 'src/**/*' --exec 'node src/app.js'",
-    "test": "lab -l -v test/*.spec.js",
+    "test": "lab -t 90 -l -v test/*.spec.js",
+    "coverage": "lab -r html -o coverage.html",
     "prettier": "prettier --write --single-quote --print-width 120 '*.js' 'src/**/*.js' 'test/**/*.js'",
     "lint": "eslint '*.js' 'src/**/*.js' 'test/**/*.js'",
     "migrate:dev": "NODE_ENV=development sequelize db:migrate",

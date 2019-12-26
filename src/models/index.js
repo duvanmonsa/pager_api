@@ -11,7 +11,9 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 
 fs.readdirSync(__dirname)
   .filter(file => {
+    /* $lab:coverage:off$ */
     return file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js';
+    /* $lab:coverage:on$ */
   })
   .forEach(file => {
     const model = sequelize['import'](path.join(__dirname, file));
@@ -19,9 +21,11 @@ fs.readdirSync(__dirname)
   });
 
 Object.keys(db).forEach(modelName => {
+  /* $lab:coverage:off$ */
   if (db[modelName].associate) {
     db[modelName].associate(db);
   }
+  /* $lab:coverage:on$ */
 });
 
 db.sequelize = sequelize;
