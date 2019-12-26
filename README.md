@@ -67,6 +67,10 @@ $ NODE_ENV=development
   DB_PASSWORD=null
   DB_PORT=54320
 ```
+### run migrations
+```
+$ npm run migrate:test
+```
 ### Run the tests
 ```
 $ npm run test

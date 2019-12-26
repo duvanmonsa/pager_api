@@ -28,13 +28,6 @@ const organizationRoutes = {
         handler: handlers.getOrganizations
       }
     );
-    const organizationPayload = Joi.object({
-      name: Joi.string().required(),
-      description: Joi.string().required(),
-      url: Joi.string().uri().required(),
-      type: Joi.string().valid(...ORGANIZATION_TYPES).required(),
-    }).label('Organization');
-
     /**
      * POST /organization
      */
@@ -47,7 +40,12 @@ const organizationRoutes = {
           notes: 'Returns organization object',
           tags: ['api'],
           validate: {
-            payload: organizationPayload
+            payload: Joi.object({
+              name: Joi.string().required(),
+              description: Joi.string().required(),
+              url: Joi.string().uri().required(),
+              type: Joi.string().valid(...ORGANIZATION_TYPES).required(),
+            }).label('Organization')
           }
         },
         handler: handlers.createOrganization
@@ -69,7 +67,12 @@ const organizationRoutes = {
             params: Joi.object({
               id: Joi.string().required()
             }),
-            payload: organizationPayload
+            payload: Joi.object({
+              name: Joi.string(),
+              description: Joi.string(),
+              url: Joi.string().uri(),
+              type: Joi.string().valid(...ORGANIZATION_TYPES),
+            })
           }
         },
         handler: handlers.updateOrganization

@@ -6,10 +6,11 @@
   "scripts": {
     "check-prettier": "prettier --list-different --single-quote --print-width 120 '*.js' 'src/**/*.js' 'test/**/*.js'",
     "start": "NODE_ENV=development nodemon --watch 'src/**/*' --exec 'node src/app.js'",
-    "test": "NODE_ENV=test mocha",
+    "test": "lab -l -v test/*.spec.js",
     "prettier": "prettier --write --single-quote --print-width 120 '*.js' 'src/**/*.js' 'test/**/*.js'",
     "lint": "eslint '*.js' 'src/**/*.js' 'test/**/*.js'",
     "migrate:dev": "NODE_ENV=development sequelize db:migrate",
+    "migrate:test": "NODE_ENV=test sequelize db:migrate",
     "migrate:prod": "NODE_ENV=production sequelize db:migrate",
     "migrate:undo": "NODE_ENV=development sequelize db:migrate:undo:all",
     "sequelize": "sequelize",
@@ -42,6 +43,8 @@
     "shortid": "^2.2.15"
   },
   "devDependencies": {
+    "@hapi/code": "^7.0.0",
+    "@hapi/lab": "^21.0.0",
     "eslint": "^6.8.0",
     "mocha": "^6.2.2",
     "nodemon": "^2.0.2",
