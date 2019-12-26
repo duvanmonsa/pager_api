@@ -16,7 +16,8 @@
     "migrate:undo": "NODE_ENV=development sequelize db:migrate:undo:all",
     "sequelize": "sequelize",
     "seed:dev": "NODE_ENV=development sequelize db:seed:all",
-    "seed:undo": "NODE_ENV=development sequelize db:seed:undo:all"
+    "seed:undo": "NODE_ENV=development sequelize db:seed:undo:all",
+    "profiling": "artillery quick --duration 60 --rate 100 -n 100 http://localhost:3000/"
   },
   "repository": {
     "type": "git",
@@ -29,8 +30,8 @@
   },
   "homepage": "https://github.com/duvanmonsa/pager_api",
   "dependencies": {
-    "@hapi/hapi": "^18.4.0",
     "@hapi/boom": "^8.0.1",
+    "@hapi/hapi": "^18.4.0",
     "@hapi/inert": "^5.2.2",
     "@hapi/joi": "^16.1.8",
     "@hapi/vision": "^5.5.4",
@@ -41,12 +42,13 @@
     "pg-hstore": "^2.3.3",
     "prettier": "^1.19.1",
     "sequelize": ">=5.21.3",
-    "shortid": "^2.2.15",
-    "sequelize-cli": "^5.5.1"
+    "sequelize-cli": "^5.5.1",
+    "shortid": "^2.2.15"
   },
   "devDependencies": {
     "@hapi/code": "^7.0.0",
     "@hapi/lab": "^21.0.0",
+    "artillery": "^1.6.0-29",
     "eslint": "^6.8.0",
     "mocha": "^6.2.2",
     "nodemon": "^2.0.2"
