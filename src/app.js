@@ -7,7 +7,7 @@ const Vision = require('@hapi/vision');
 const HapiSwagger = require('hapi-swagger');
 
 const Pack = require('../package')
-const resources = require('./api/resource');
+const organizations = require('./api/organization');
 
 if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
   require('dotenv').config({
@@ -39,7 +39,7 @@ const server = Hapi.server({
 
 const addAPIs = async () => {
   await server.register([
-    resources
+    organizations
   ])
 }
 

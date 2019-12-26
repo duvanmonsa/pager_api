@@ -1,6 +1,6 @@
 
 module.exports = Object.freeze({
-  RESOURCE_TYPES: [
+  ORGANIZATION_TYPES: [
     'employer',
     'insurance',
     'health system'

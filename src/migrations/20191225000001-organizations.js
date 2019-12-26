@@ -1,10 +1,10 @@
 'use strict';
 
-const { RESOURCE_TYPES } = require('../constants');
+const { ORGANIZATION_TYPES } = require('../constants');
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Resources', {
+    return queryInterface.createTable('Organizations', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -30,7 +30,7 @@ module.exports = {
       type: {
         allowNull: false,
         type: Sequelize.ENUM,
-        values: RESOURCE_TYPES
+        values: ORGANIZATION_TYPES
       },
       createdAt: {
         allowNull: false,
@@ -43,6 +43,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Resources');
+    return queryInterface.dropTable('Organizations');
   }
 };

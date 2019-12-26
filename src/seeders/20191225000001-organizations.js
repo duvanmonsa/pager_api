@@ -3,38 +3,38 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert(
-      'Resources',
+      'Organizations',
       [
         {
-          name: 'Resource one',
-          description: 'This is the current desc for this resource',
+          name: 'Organization one',
+          description: 'This is the current desc for this Organization',
           url: 'https://pager.com',
-          code: 'resource_one',
+          code: 'organization_one',
           type: 'employer',
           createdAt: 'now()',
           updatedAt: 'now()'
         },
         {
-          name: 'Resource Two',
-          description: 'This is the current desc for this resource',
+          name: 'Organization Two',
+          description: 'This is the current desc for this organization',
           url: 'https://pager.com',
-          code: 'resource_two',
+          code: 'organization_two',
           type: 'insurance',
           createdAt: 'now()',
           updatedAt: 'now()'
         },
         {
-          name: 'Resource Three',
-          description: 'This is the current desc for this resource',
+          name: 'Organization Three',
+          description: 'This is the current desc for this organization',
           url: 'https://pager.com',
-          code: 'resource_three',
+          code: 'organization_three',
           type: 'health system',
           createdAt: 'now()',
           updatedAt: 'now()'
         },
         {
-          name: 'Resource Four',
-          description: 'This is the current desc for this resource',
+          name: 'Organization Four',
+          description: 'This is the current desc for this organization',
           url: 'https://pager.com',
           type: 'insurance',
           createdAt: 'now()',
@@ -46,6 +46,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Resources', null, {});
+    return queryInterface.bulkDelete('Organizations', null, {});
   }
 };

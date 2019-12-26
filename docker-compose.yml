@@ -4,21 +4,16 @@ services:
     build: .
     depends_on:
       - postgres
-    links:
-      - 'postgres'
     environment:
       PORT: 3000
       JWT_SECRET: YOUR_JWT_KEY
       DB_NAME: pager
       DB_USERNAME: pager_user
-      DB_HOSTNAME: localhost
+      DB_HOSTNAME: postgres
     ports:
       - "3000:3000"
     command: npm run migrate:dev
     command: npm run start
-    volumes:
-      - .:/app/
-      - /app/node_modules
 
   postgres:
     image: postgres

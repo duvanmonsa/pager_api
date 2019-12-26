@@ -1,18 +1,18 @@
 'use strict';
 
-const { RESOURCE_TYPES } = require('../constants');
+const { ORGANIZATION_TYPES } = require('../constants');
 
 module.exports = (sequelize, DataTypes) => {
-  const Resource = sequelize.define(
-    'Resource',
+  const Organization = sequelize.define(
+    'Organization',
     {
       name: DataTypes.STRING,
       description: DataTypes.STRING,
       url: DataTypes.STRING,
       code: DataTypes.STRING,
-      type: DataTypes.ENUM(RESOURCE_TYPES)
+      type: DataTypes.ENUM(ORGANIZATION_TYPES)
     },
     {}
   );
-  return Resource;
+  return Organization;
 };
