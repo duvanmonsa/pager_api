@@ -1,8 +1,12 @@
 'use strict'
 
-const Hapi = require('hapi')
+const Hapi = require('@hapi/hapi')
 const Boom = require('@hapi/boom')
+const Inert = require('@hapi/inert');
+const Vision = require('@hapi/vision');
+const HapiSwagger = require('hapi-swagger');
 
+const Pack = require('../package')
 const resources = require('./api/resource');
 
 if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
@@ -38,6 +42,26 @@ const addAPIs = async () => {
     resources
   ])
 }
+
+// add swagger
+const addSwagger = async () => {
+
+  const swaggerOptions = {
+    info: {
+      title: 'Pager API Documentation',
+      version: Pack.version,
+    },
+  };
+
+  await server.register([
+    Inert,
+    Vision,
+    {
+      plugin: HapiSwagger,
+      options: swaggerOptions
+    }
+  ]);
+}
 const init = async () => {
   server.route({
     method: 'GET',
@@ -54,6 +78,7 @@ const init = async () => {
     }
   })
   await addAPIs()
+  await addSwagger()
   await server.start()
   console.log('Server up on %s', server.info.uri)
 }

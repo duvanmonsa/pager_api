@@ -17,11 +17,12 @@ const resources = {
         config: {
           description: 'Get a list of resources',
           notes: 'Returns an array of resources',
+          tags: ['api'],
           validate: {
-            query: {
+            query: Joi.object({
               name: Joi.string().description('filter by name'),
               code: Joi.string().description('filter by code')
-            }
+            })
           }
         },
         handler: handlers.getResources
@@ -38,10 +39,11 @@ const resources = {
         config: {
           description: 'Get resource by id',
           notes: 'Returns resource object',
+          tags: ['api'],
           validate: {
-            params: {
+            params: Joi.object({
               id: Joi.string().required()
-            }
+            })
           }
         },
         handler: handlers.getResource
@@ -58,13 +60,14 @@ const resources = {
         config: {
           description: 'Create a new resource',
           notes: 'Returns resource object',
+          tags: ['api'],
           validate: {
-            payload: {
+            payload: Joi.object({
               name: Joi.string().required(),
               description: Joi.string().required(),
               url: Joi.string().uri().required(),
-              type: Joi.string().valid(RESOURCE_TYPES).required(),
-            }
+              type: Joi.string().valid(RESOURCE_TYPES[0], RESOURCE_TYPES[1], RESOURCE_TYPES[2]).required(),
+            })
           }
         },
         handler: handlers.createResource
@@ -81,16 +84,17 @@ const resources = {
         config: {
           description: 'Update resource by id',
           notes: 'Returns resource object',
+          tags: ['api'],
           validate: {
-            params: {
+            params: Joi.object({
               id: Joi.string().required()
-            },
-            payload: {
+            }),
+            payload: Joi.object({
               name: Joi.string().required(),
               description: Joi.string().required(),
               url: Joi.string().uri().required(),
-              type: Joi.string().valid(RESOURCE_TYPES).required(),
-            }
+              type: Joi.string().valid(RESOURCE_TYPES[0], RESOURCE_TYPES[1], RESOURCE_TYPES[2]).required(),
+            })
           }
         },
         handler: handlers.updateResource
@@ -107,10 +111,11 @@ const resources = {
         config: {
           description: 'Delete resource by id',
           notes: 'Returns delete status',
+          tags: ['api'],
           validate: {
-            params: {
+            params: Joi.object({
               id: Joi.string().required()
-            }
+            })
           }
         },
         handler: handlers.deleteResource
