@@ -1,14 +1,15 @@
-FROM node:12.10.0-alpine
-RUN apk add --no-cache --virtual .gyp python make g++
-EXPOSE 3000 9229
+FROM node:12
 
-WORKDIR /home/app
+WORKDIR /app
 
-COPY package.json /home/app/
-COPY package-lock.json /home/app/
+COPY ./package.json .
+COPY ./package-lock.json .
 
-RUN npm ci
+RUN npm install
 
-COPY . /home/app
+COPY . .
 
-CMD [ "node", "src/app.js" ]
+EXPOSE 3000
+
+CMD npm run migrate:dev
+CMD npm start

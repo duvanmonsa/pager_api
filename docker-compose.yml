@@ -1,24 +1,30 @@
-version: '3'
+version: "3"
 services:
-  postgres:
-    image: "postgres"  
-    environment:
-      POSTGRES_DB: pager
-      POSTGRES_USER: pager_user
-      POSTGRES_PASSWORD: password
-  api:
+  app:
     build: .
     depends_on:
       - postgres
+    links:
+      - 'postgres'
     environment:
       PORT: 3000
       JWT_SECRET: YOUR_JWT_KEY
       DB_NAME: pager
       DB_USERNAME: pager_user
-      DB_HOSTNAME: 127.0.0.1
-      DB_PASSWORD: password
-      DB_PORT: 5432
-    # env_file: development.env
+      DB_HOSTNAME: localhost
     ports:
       - "3000:3000"
-      - "9229:9229"
+    command: npm run migrate:dev
+    command: npm run start
+    volumes:
+      - .:/app/
+      - /app/node_modules
+
+  postgres:
+    image: postgres
+    ports:
+      - "35432:5432"
+    environment:
+      POSTGRES_USER: pager_user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: pager

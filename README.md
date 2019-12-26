@@ -4,6 +4,13 @@
 ```
 $ git clone git@github.com:duvanmonsa/pager_api.git
 ```
+### Start API 
+docker-compose up
+
+docker exec -it 7c778c2a0cec bash
+
+## Setup manually
+
 ### Install Postgrest Docker
 If you already have postgrest jump to the next step.
 ```

@@ -1,5 +1,8 @@
-const models = require('../../models');
 const Sequelize = require('sequelize');
+const shortid = require('shortid');
+
+const models = require('../../models');
+
 const Op = Sequelize.Op;
 
 const getResource = async (req, h) => {
@@ -43,4 +46,23 @@ const getResources = async (req, h) => {
   }
 };
 
-module.exports = { getResources, getResource };
+const createResource = async (req, h) => {
+  try {
+    const resource = req.payload;
+    resource.code = shortid.generate();
+
+    if (!resource) {
+      throw new Error('You need to provide resource data');
+    }
+
+    const newResource = await models.Resource.create(resource);
+    if (!newResource) {
+      throw new Error('Resource no created');
+    }
+    return h.response(newResource);
+  } catch (err) {
+    h.response({ error: err.message }).code(201);
+  }
+};
+
+module.exports = { getResources, getResource, createResource };
