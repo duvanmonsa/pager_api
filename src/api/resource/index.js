@@ -54,14 +54,14 @@ const resources = {
 
 
     /**
-     * PUT /resource
+     * PUT /resource/{id}
      */
     server.route(
       {
         method: 'PUT',
         path: '/resource/{id}',
         config: {
-          description: 'Update a resource by id',
+          description: 'Update resource by id',
           notes: 'Returns the resource updated',
           validate: {
             params: {
@@ -79,26 +79,26 @@ const resources = {
       }
     );
 
-    // server.route({
-    //   method: ['GET', 'PUT', 'POST'],
-    //   path: '/api/movie/{title?}',
-    //   config: {
-    //     validate: {
-    //       params: {
-    //         title: Joi.string().required()
-    //       }
-    //     }
-    //   },
-    //   handler: async (request, h) => {
-    //     let findMovie
-    //     try {
-    //       findMovie = await movieCall(process.env.API_KEY, request.params.title)
-    //     } catch (err) {
-    //       console.error(err)
-    //     }
-    //     return h.response(findMovie).type('application/json')
-    //   }
-    // })
+
+    /**
+     * DELETE /resource/{id}
+     */
+    server.route(
+      {
+        method: 'DELETE',
+        path: '/resource/{id}',
+        config: {
+          description: 'Delete resource by id',
+          notes: 'Returns the resource updated',
+          validate: {
+            params: {
+              id: Joi.string().required()
+            }
+          }
+        },
+        handler: handlers.deleteResource
+      }
+    );
   }
 }
 

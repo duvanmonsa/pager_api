@@ -7,18 +7,11 @@ const Op = Sequelize.Op;
 
 const getResource = async (req, h) => {
   try {
-    const resourceId = req.params.id;
-
-    if (!resourceId) {
-      throw new Error('You need to provide an id');
-    }
-
     const resource = await models.Resource.findByPk(resourceId);
     if (!resource) {
-      throw new Error('Resource no found');
+      return h.response({ error: 'Resource no found' }).code(500);
     }
-    // h.response({ hola }).type('application/json');
-    return h.response({ hola: "" });
+    return h.response(resource);
   } catch (err) {
     h.response({ error: err.message }).code(201);
   }
@@ -53,7 +46,7 @@ const createResource = async (req, h) => {
 
     const newResource = await models.Resource.create(resource);
     if (!newResource) {
-      throw new Error('Resource no created');
+      return h.response({ error: 'Resource no created' }).code(500);
     }
     return h.response(newResource);
   } catch (err) {
@@ -64,18 +57,34 @@ const createResource = async (req, h) => {
 const updateResource = async (req, h) => {
   try {
     const resourceId = req.params.id;
-    if (!resourceId) {
-      throw new Error('You need to provide an id');
-    }
     const resource = req.payload;
-    const updatedResource = await models.Resource.update(resource, { where: { id: resourceId }, returning: true }).then(result => result[1]);
-    if (!updatedResource) {
-      throw new Error('Resource was no updated');
+
+    const currentResource = await models.Resource.findByPk(resourceId);
+    if (!currentResource) {
+      return h.response({ error: 'Resource no found' }).code(500);
     }
-    return h.response(updatedResource);
+
+    await currentResource.update(resource);
+
+    return h.response(currentResource);
   } catch (err) {
     h.response({ error: err.message }).code(201);
   }
 };
 
-module.exports = { getResources, getResource, createResource, updateResource };
+const deleteResource = async (req, h) => {
+  try {
+    const resourceId = req.params.id;
+
+    const resource = await models.Resource.findByPk(resourceId);
+    if (!resource) {
+      return h.response({ error: 'Resource no found' }).code(500);
+    }
+    await resource.destroy();
+    return h.response({ successful: true });
+  } catch (err) {
+    h.response({ error: err.message }).code(201);
+  }
+};
+
+module.exports = { getResources, getResource, createResource, updateResource, deleteResource };
