@@ -10,9 +10,10 @@ $ docker-compose up
 ```
 
 ### API documentation
-[link text itself]: http://localhost:3000/documentation
 
-## Setup manually without docker
+[http://localhost:3000/documentation](http://localhost:3000/documentation)
+
+## Setup manually
 
 ### Install Postgrest Docker
 If you already have postgrest jump to the next step.
