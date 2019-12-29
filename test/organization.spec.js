@@ -4,11 +4,15 @@ const Lab = require('@hapi/lab');
 const { expect } = require('@hapi/code');
 const { before, after, describe, it } = exports.lab = Lab.script();
 const { init } = require('../src/server');
+const models = require('../src/models');
 
 describe('Organization API', () => {
   let server;
   before(async () => {
     server = await init();
+    // clean db
+    await models.Organization.destroy({ truncate: true })
+
   });
   after(async () => {
     await server.stop();
