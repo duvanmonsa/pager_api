@@ -1,7 +1,7 @@
 const Joi = require('@hapi/joi');
-const { ORGANIZATION_TYPES } = require('../../constants');
 
 const handlers = require('./handlers');
+const { ORGANIZATION_TYPES } = require('../../constants');
 
 const organizationRoutes = {
   name: 'organization',
@@ -45,7 +45,7 @@ const organizationRoutes = {
               description: Joi.string().required(),
               url: Joi.string().uri().required(),
               type: Joi.string().valid(...ORGANIZATION_TYPES).required(),
-            }).label('Organization')
+            }).label('Organization Create')
           }
         },
         handler: handlers.createOrganization
@@ -72,7 +72,7 @@ const organizationRoutes = {
               description: Joi.string(),
               url: Joi.string().uri(),
               type: Joi.string().valid(...ORGANIZATION_TYPES),
-            })
+            }).label('Organization Update')
           }
         },
         handler: handlers.updateOrganization

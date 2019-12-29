@@ -13,7 +13,7 @@ describe('Organization API', () => {
   after(async () => {
     await server.stop();
   });
-  describe('GET / and /test', () => {
+  describe('GET / and /no-exist', () => {
     it('responds with 200', async () => {
       const res = await server.inject({
         method: 'get',

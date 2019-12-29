@@ -1,10 +1,21 @@
 # Pager Api
+Organization API for Pager
+
+## Demo
+
+### API Documentation
+[https://pager-api-duvan.herokuapp.com/documentation](https://pager-api-duvan.herokuapp.com/documentation)
+
+### Endpoint Url 
+[https://pager-api-duvan.herokuapp.com](https://pager-api-duvan.herokuapp.com)
+
+## Setup Locally with Docker Compose
 
 ### Clone project
 ```
 $ git clone git@github.com:duvanmonsa/pager_api.git
 ```
-### Start API 
+### Run Docker 
 ```
 $ docker-compose up
 ```
@@ -15,17 +26,17 @@ $ docker-compose up
 
 ## Setup manually
 
-### Install Postgrest Docker
+### Install Postgres with Docker
 If you already have postgrest jump to the next step.
 ```
 $ docker run -d --name pager_postgrest -v my_dbdata:/var/lib/postgresql/data -p 54320:5432 postgres:11
 ```
 
 ### Create development.env
-create a `development.env` and set your own data for postgrest connection.
+create a `development.env` and set your own data for postgres connection.
 ```
 $ NODE_ENV=development
-  PORT=4000
+  PORT=3000
   JWT_SECRET=YOUR_JWT_KEY
   DB_NAME=postgres
   DB_USERNAME=postgres
@@ -33,22 +44,22 @@ $ NODE_ENV=development
   DB_PASSWORD=null
   DB_PORT=54320
 ```
-### installation
+### Installation dependencies
 ```
 $ npm install
 ```
 
-### run migrations
+### Run migrations
 ```
 $ npm run migrate:dev
 ```
 
-### seed fake data into the DB
+### Seed fake data into the DB
 ```
 $ npm run seed:dev
 ```
 
-### run the project
+### Run the project
 ```
 $ npm start
 ```
@@ -56,10 +67,10 @@ $ npm start
 ## Test Project
 
 ### Create test.env
-create a `test.env` and set your own postgrest connection for tests.
+create a `test.env` and set your own postgres connection for tests.
 ```
 $ NODE_ENV=development
-  PORT=4000
+  PORT=3000
   JWT_SECRET=YOUR_JWT_KEY
   DB_NAME=postgres
   DB_USERNAME=postgres
