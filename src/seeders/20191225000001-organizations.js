@@ -39,7 +39,7 @@ module.exports = {
           type: 'insurance',
           createdAt: 'now()',
           updatedAt: 'now()'
-        },
+        }
       ],
       {}
     );

@@ -2,7 +2,7 @@
 
 const Lab = require('@hapi/lab');
 const { expect } = require('@hapi/code');
-const { before, after, describe, it } = exports.lab = Lab.script();
+const { before, after, describe, it } = (exports.lab = Lab.script());
 const { init } = require('../src/server');
 const models = require('../src/models');
 
@@ -11,8 +11,7 @@ describe('Organization API', () => {
   before(async () => {
     server = await init();
     // clean db
-    await models.Organization.destroy({ truncate: true })
-
+    await models.Organization.destroy({ truncate: true });
   });
   after(async () => {
     await server.stop();
@@ -35,11 +34,11 @@ describe('Organization API', () => {
   });
 
   const organization = {
-    "name": "OrganizationNewName",
-    "description": "This is the current desc for this organization",
-    "type": "insurance",
-    "url": "http://google.com",
-  }
+    name: 'OrganizationNewName',
+    description: 'This is the current desc for this organization',
+    type: 'insurance',
+    url: 'http://google.com'
+  };
   let newOrganization;
 
   describe('POST /organization', () => {
@@ -47,7 +46,7 @@ describe('Organization API', () => {
       const res = await server.inject({
         method: 'post',
         url: '/organization',
-        payload: {},
+        payload: {}
       });
       expect(res.statusCode).to.equal(400);
     });
@@ -56,7 +55,7 @@ describe('Organization API', () => {
       const res = await server.inject({
         method: 'post',
         url: '/organization',
-        payload: organization,
+        payload: organization
       });
       newOrganization = res.result;
       expect(res.statusCode).to.equal(200);
@@ -78,7 +77,7 @@ describe('Organization API', () => {
     it('Get organization by name', async () => {
       const res = await server.inject({
         method: 'get',
-        url: `/organization?name=${organization.name}`,
+        url: `/organization?name=${organization.name}`
       });
       expect(res.statusCode).to.equal(200);
       expect(res.result.length).to.equal(1);
@@ -87,12 +86,11 @@ describe('Organization API', () => {
     it('Get organization by code', async () => {
       const res = await server.inject({
         method: 'get',
-        url: `/organization?code=test`,
+        url: `/organization?code=test`
       });
       expect(res.statusCode).to.equal(200);
       expect(res.result.length).to.equal(0);
     });
-
   });
 
   describe('PUT /organization/{id}', () => {
@@ -124,14 +122,14 @@ describe('Organization API', () => {
     it('Delete organization no found', async () => {
       const res = await server.inject({
         method: 'delete',
-        url: `/organization/99999`,
+        url: `/organization/99999`
       });
       expect(res.statusCode).to.equal(500);
     });
     it('Delete organization', async () => {
       const res = await server.inject({
         method: 'delete',
-        url: `/organization/${newOrganization.id}`,
+        url: `/organization/${newOrganization.id}`
       });
       expect(res.statusCode).to.equal(200);
       expect(res.result).to.equal({ successful: true });
